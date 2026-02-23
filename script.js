@@ -3,7 +3,7 @@ let interviewList = [];
 let rejectedList = [];
 
 
-const currentStatus = "all-filtering-btn";
+let currentStatus = "all-filtering-btn";
 
 const totalCount = document.getElementById("total");
 const availableJobs = document.getElementById("availableJobs");
@@ -45,13 +45,31 @@ function togglingStyle(id) {
 
     clickedBtn.classList.remove("bg-gray-300", "text-black");
     clickedBtn.classList.add("bg-amber-300", "text-white");
+
+    currentStatus = id;
+    if(currentStatus === "interview-filtering-btn"){
+        allCardsSection.classList.add("hidden");
+        filterSection.classList.remove("hidden");
+        renderInterview();
+
+    } else if (currentStatus === "all-filtering-btn"){
+        allCardsSection.classList.remove("hidden");
+        filterSection.classList.add("hidden");
+    } else if (currentStatus === "rejected-filtering-btn") {
+        allCardsSection.classList.add("hidden");
+        filterSection.classList.remove("hidden");
+        renderRejected();
+    }
 }
 togglingStyle("all-filtering-btn");
 
 
 //event delegation orthat parent a click kore btn child dhore kaj korsi
 
-allCardsSection.addEventListener("click", function (event) {
+filterSection.addEventListener("click", handleCard)
+allCardsSection.addEventListener("click", handleCard)
+    
+    function handleCard (event) {
     const successBtn = event.target.closest(".success-btn-of-card");
     const warningBtn = event.target.closest(".warning-btn-of-card");
     const deleteBtn = event.target.closest(".delete-btn-of-card");
@@ -82,14 +100,41 @@ allCardsSection.addEventListener("click", function (event) {
         if (!existInterview) {
             interviewList.push(cardInfo);
         }
+        calculate();
 
+    } else if (warningBtn) {
+        const parentNode = event.target.closest(".card-item")
+
+        const title = parentNode.querySelector(".title-of-card").innerText;
+        const skill = parentNode.querySelector(".skill-of-card").innerText;
+        const salary = parentNode.querySelector(".salary-of-card").innerText;
+        const status = parentNode.querySelector(".status-of-card").innerText;
+        const description = parentNode.querySelector(".description-of-card").innerText;
+
+        const cardInfo = {
+            title,
+            skill,
+            salary,
+            status: "Rejected",
+            description
+        }
+
+
+
+        const existWarning = rejectedList.find(item => item.title === cardInfo.title);
+
+
+        if (!existWarning) {
+            rejectedList.push(cardInfo);
+        }
+        calculate();
     }
-})
+}
 
 
 function renderInterview() {
 
-    filterSection = "";
+    filterSection.innerHTML = "";
     for (const interview of interviewList) {
         let div = document.createElement("div");
         div.className = "card-item flex justify-between border p-[30px]";
@@ -101,7 +146,7 @@ function renderInterview() {
                         <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
                     </div>
                     <div>
-                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">${interview.status}</p>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-green-300">${interview.status}</p>
                     </div>
                     <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
                         users worldwide.</p>
@@ -120,6 +165,45 @@ function renderInterview() {
     }
 
     
-    console.log(filterSection);
-
+    
 }
+renderInterview();
+
+
+function renderRejected() {
+
+    filterSection.innerHTML = "";
+    for (const rejected of rejectedList) {
+        let div = document.createElement("div");
+        div.className = "card-item flex justify-between border p-[30px]";
+        div.innerHTML = `
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">${rejected.title}</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-red-300">${rejected.status}</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can delete-btn-of-card"></i>
+                    </button>
+                </div>
+    `
+    filterSection.appendChild(div);
+    }
+
+    
+    
+}
+renderRejected();
+
