@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <header class="max-w-[80%] mx-auto space-y-6 md:sticky top-0 bg-base-200 z-20 p-3 border border-base-300">
+        <h1 class="text-4xl"> Job Application Tracker</h1>
+        <!-- counting part -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-[60px]">
+            <div class="card bg-neutral text-neutral-content p-5 space-y-2">
+                <h2 class="card-title">Total</h2>
+                <p id="total" class="font-bold">0</p>
+            </div>
+            <div class="card bg-primary text-neutral-content p-5 space-y-2">
+                <h2 class="card-title">Interview</h2>
+                <p id="interviewCount" class="font-bold">0</p>
+            </div>
+            <div class="card bg-secondary text-neutral-content p-5 space-y-2">
+                <h2 class="card-title">Rejected</h2>
+                <p id="rejectedCount" class="font-bold">0</p>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-[80%] mx-auto space-y-6 mt-[40px]">
+        <div class="flex justify-between">
+            <h2 class="font-bold ">Available Jobs</h2>
+            <p><span id="availableJobs" class="">0</span> Jobs</p>
+        </div>
+        <div>
+            
+            <button onclick="togglingStyle('all-filtering-btn')" id="all-filtering-btn" class="px-4 py-2 bg-amber-300 rounded-xl text-black">All</button>
+            <button onclick="togglingStyle('interview-filtering-btn')" id="interview-filtering-btn" class="px-4 py-2 bg-gray-300 rounded-xl text-black">Interview</button>
+            <button onclick="togglingStyle('rejected-filtering-btn')" id="rejected-filtering-btn" class="px-4 py-2 bg-gray-300 rounded-xl text-black">Rejected</button>
+        </div>
+
+        <!-- filter section  -->
+        <div id="filter-section" class="card-container space-y-6 hidden">
+
+        </div>
+
+        <!-- all cards section -->
+        <div id="all-cards" class="card-container space-y-6">
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp - 1</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can delete-btn-of-card"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp - 2</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp - 3</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp - 4</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp - 5</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp - 6</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp - 7</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-item flex justify-between border p-[30px]">
+                <div class="space-y-2">
+                    <div class="space-y-2">
+                        <h2 class="title-of-card font-bold">Mobile First Corp -8</h2>
+                        <p class="skill-of-card">React Native Developer</p>
+                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+                    <div>
+                        <p class="status-of-card font-bold btn px-3 py-1 bg-base-300">NOT APPLIED</p>
+                    </div>
+                    <p class="description-of-card">Build cross-platform mobile applications using React Native. Work on products used by millions of
+                        users worldwide.</p>
+                    <div>
+                        <button class="success-btn-of-card btn btn-active btn-info">Success</button>
+                        <button class="warning-btn-of-card btn btn-active btn-warning">Warning</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-btn-of-card btn rounded-full w-[30px] h-[30px] p-[24px]">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- mobile first corp section  -->
+        <div id="empty-info" class="border p-[30px] hidden">
+            <div class="space-y-2 flex flex-col items-center">
+                <img src="./image/jobs.png" alt="">
+                <h2>Mobile First Corp</h2>
+                <p>Check back soon for new job opportunities</p>
+            </div>
+
+        </div>
+    </main>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
