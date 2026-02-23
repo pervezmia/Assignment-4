@@ -49,20 +49,19 @@ function togglingStyle(id) {
     clickedBtn.classList.add("bg-amber-300", "text-white");
 
     currentStatus = id;
+    emptyInfo.classList.add("hidden");
     if(currentStatus === "interview-filtering-btn"){
         allCardsSection.classList.add("hidden");
         filterSection.classList.remove("hidden");
         renderInterview();
         if(interviewList.length === 0){
             emptyInfo.classList.remove("hidden");
-         } else {
-            emptyInfo.classList.add("hidden");
          }
 
     } else if (currentStatus === "all-filtering-btn"){
         allCardsSection.classList.remove("hidden");
         filterSection.classList.add("hidden");
-        emptyInfo.classList.add("hidden");
+    emptyInfo.classList.add("hidden");
          
     } else if (currentStatus === "rejected-filtering-btn") {
         allCardsSection.classList.add("hidden");
@@ -70,8 +69,6 @@ function togglingStyle(id) {
         renderRejected();
         if(rejectedList.length === 0){
             emptyInfo.classList.remove("hidden");
-         }else{
-            emptyInfo.classList.add("hidden");
          }
     }
 }
@@ -109,7 +106,6 @@ allCardsSection.addEventListener("click", handleCard)
 
 
         const existInterview = interviewList.find(item => item.title === cardInfo.title);
-
 
         if (!existInterview) {
             interviewList.push(cardInfo);
@@ -153,9 +149,13 @@ allCardsSection.addEventListener("click", handleCard)
         calculate();
     } else if (deleteBtn) {
         const parentNode = event.target.closest(".card-item");
+        const parent = parentNode.parentNode;
+        console.log(parent);
         const title = parentNode.querySelector(".title-of-card").innerText;
         parentNode.remove();
-
+        if(parent.children.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
         interviewList = interviewList.filter(item => item.title !== title);
         rejectedList = rejectedList.filter(item => item.title !== title);
 
@@ -166,6 +166,9 @@ allCardsSection.addEventListener("click", handleCard)
 
 
 function renderInterview() {
+    if(interviewList.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
 
     filterSection.innerHTML = "";
     for (const interview of interviewList) {
@@ -175,8 +178,8 @@ function renderInterview() {
                 <div class="space-y-2">
                     <div class="space-y-2">
                         <h2 class="title-of-card font-bold">${interview.title}</h2>
-                        <p class="skill-of-card">React Native Developer</p>
-                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                        <p class="skill-of-card">${interview.skill}</p>
+                        <p class="salary-of-card">${interview.salary}</p>
                     </div>
                     <div>
                         <p class="status-of-card font-bold btn px-3 py-1 bg-green-300">${interview.status}</p>
@@ -200,10 +203,13 @@ function renderInterview() {
     
     
 }
-renderInterview();
+// renderInterview();
 
 
 function renderRejected() {
+    if(rejectedList.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
 
     filterSection.innerHTML = "";
     for (const rejected of rejectedList) {
@@ -213,8 +219,8 @@ function renderRejected() {
                 <div class="space-y-2">
                     <div class="space-y-2">
                         <h2 class="title-of-card font-bold">${rejected.title}</h2>
-                        <p class="skill-of-card">React Native Developer</p>
-                        <p class="salary-of-card">Remote • Full-time • $130,000 - $175,000</p>
+                        <p class="skill-of-card">${rejected.skill}</p>
+                        <p class="salary-of-card">${rejected.salary}</p>
                     </div>
                     <div>
                         <p class="status-of-card font-bold btn px-3 py-1 bg-red-300">${rejected.status}</p>
@@ -238,5 +244,5 @@ function renderRejected() {
     
     
 }
-renderRejected();
+// renderRejected();
 
