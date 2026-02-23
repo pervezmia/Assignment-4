@@ -19,6 +19,8 @@ const allCardsSection = document.getElementById("all-cards");
 
 let filterSection = document.getElementById("filter-section");
 
+const emptyInfo = document.getElementById("empty-info");
+
 //calculation
 function calculate() {
     totalCount.innerText = allCardsSection.children.length;
@@ -51,14 +53,21 @@ function togglingStyle(id) {
         allCardsSection.classList.add("hidden");
         filterSection.classList.remove("hidden");
         renderInterview();
+        if(interviewList.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
 
     } else if (currentStatus === "all-filtering-btn"){
         allCardsSection.classList.remove("hidden");
         filterSection.classList.add("hidden");
+         
     } else if (currentStatus === "rejected-filtering-btn") {
         allCardsSection.classList.add("hidden");
         filterSection.classList.remove("hidden");
         renderRejected();
+        if(rejectedList.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
     }
 }
 togglingStyle("all-filtering-btn");

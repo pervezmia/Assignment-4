@@ -1,12 +1,12 @@
 Answer to the question no.1
 
-HTML File এ কোন ট্যাগ id দিয়ে define করলে জাভা স্ক্রিপ্টে তাকে ধরতে getElementById ব্যবহার করা হয় 
+HTML File এ কোন ট্যাগ id দিয়ে define করলে জাভা স্ক্রিপ্টে তাকে ধরতে getElementById ব্যবহার করা হয় -- only one element
 
-HTML File এ কোন ট্যাগ class  দিয়ে define করলে জাভা স্ক্রিপ্টে তাকে ধরতে getElementsByClassName ব্যবহার করা হয়
+HTML File এ কোন ট্যাগ class  দিয়ে define করলে জাভা স্ক্রিপ্টে তাকে ধরতে getElementsByClassName ব্যবহার করা হয় -- one or one more elements
 
-HTML File এ কিছু ট্যাগ same class  দিয়ে define করলে জাভা স্ক্রিপ্টে তাদের প্রথমটা কে ধরতে querySelector ব্যবহার করা হয়
+HTML File এ কিছু ট্যাগ same class  দিয়ে define করলে জাভা স্ক্রিপ্টে তাদের প্রথমটা কে ধরতে querySelector ব্যবহার করা হয় -- first one element 
 
-HTML File এ কোন ট্যাগ class and id  দিয়ে define করলে জাভা স্ক্রিপ্টে তাদের ধরতে querySelectorAll ব্যবহার করা হয় 
+HTML File এ কোন ট্যাগ class and id  দিয়ে define করলে জাভা স্ক্রিপ্টে তাদের ধরতে querySelectorAll ব্যবহার করা হয় -- One or One more elements
 
 
 
