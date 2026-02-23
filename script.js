@@ -55,11 +55,14 @@ function togglingStyle(id) {
         renderInterview();
         if(interviewList.length === 0){
             emptyInfo.classList.remove("hidden");
+         } else {
+            emptyInfo.classList.add("hidden");
          }
 
     } else if (currentStatus === "all-filtering-btn"){
         allCardsSection.classList.remove("hidden");
         filterSection.classList.add("hidden");
+        emptyInfo.classList.add("hidden");
          
     } else if (currentStatus === "rejected-filtering-btn") {
         allCardsSection.classList.add("hidden");
@@ -67,6 +70,8 @@ function togglingStyle(id) {
         renderRejected();
         if(rejectedList.length === 0){
             emptyInfo.classList.remove("hidden");
+         }else{
+            emptyInfo.classList.add("hidden");
          }
     }
 }
@@ -109,6 +114,10 @@ allCardsSection.addEventListener("click", handleCard)
         if (!existInterview) {
             interviewList.push(cardInfo);
         }
+        rejectedList = rejectedList.filter(item => item.title != cardInfo.title);
+        if(currentStatus === "rejected-filtering-btn"){
+            renderRejected();
+        }
         calculate();
 
     } else if (warningBtn) {
@@ -136,7 +145,22 @@ allCardsSection.addEventListener("click", handleCard)
         if (!existWarning) {
             rejectedList.push(cardInfo);
         }
+
+        interviewList = interviewList.filter(item => item.title != cardInfo.title);
+        if(currentStatus === "interview-filtering-btn"){
+            renderInterview();
+        }
         calculate();
+    } else if (deleteBtn) {
+        const parentNode = event.target.closest(".card-item");
+        const title = parentNode.querySelector(".title-of-card").innerText;
+        parentNode.remove();
+
+        interviewList = interviewList.filter(item => item.title !== title);
+        rejectedList = rejectedList.filter(item => item.title !== title);
+
+        calculate();
+
     }
 }
 
